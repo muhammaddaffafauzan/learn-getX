@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
-
+import 'package:learn_getx/app/modules/payment/views/payment_output.dart';
 import '../modules/counter/bindings/counter_binding.dart';
 import '../modules/counter/views/counter_view.dart';
 import '../modules/formulir/bindings/formulir_binding.dart';
 import '../modules/formulir/views/formulir_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/payment/bindings/payment_binding.dart';
+import '../modules/payment/views/payment_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 
@@ -24,18 +26,27 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () =>  ProfileView(),
+      page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
       name: _Paths.COUNTER,
-      page: () =>  CounterView(),
+      page: () => CounterView(),
       binding: CounterBinding(),
     ),
     GetPage(
       name: _Paths.FORMULIR,
-      page: () =>  FormulirView(),
+      page: () => FormulirView(),
       binding: FormulirBinding(),
+    ),
+    GetPage(
+      name: _Paths.PAYMENT,
+      page: () => PaymentView(),
+      binding: PaymentBinding(),
+    ),
+    GetPage(
+      name: _Paths.PAYMENT_OUPUT,
+      page: () => PaymentOutput(dataFormulir: Get.arguments),
     ),
   ];
 }

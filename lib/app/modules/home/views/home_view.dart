@@ -39,7 +39,7 @@ class HomeView extends GetView<HomeController> {
                 style: TextStyle(fontSize: 20),
               ),
             ),
-                         ElevatedButton(
+             ElevatedButton(
               onPressed: () {
                 Get.toNamed('/formulir');
               },
@@ -47,7 +47,16 @@ class HomeView extends GetView<HomeController> {
                 'to formulir page',
                 style: TextStyle(fontSize: 20),
               ),
-            )
+            ),
+             ElevatedButton(
+              onPressed: () {
+                Get.toNamed('/payment');
+              },
+              child: Text(
+                'to formulir payment',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
           ],
         ),
       ),

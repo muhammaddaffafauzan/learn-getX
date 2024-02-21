@@ -22,7 +22,7 @@ class PaymentView extends StatelessWidget {
               children: [
                 Container(
                   width: 500,
-                  height: 720,
+                  height: 750,
                   decoration: BoxDecoration(
                     color: Colors.grey[100],
                     borderRadius: BorderRadius.circular(

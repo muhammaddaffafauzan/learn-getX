@@ -1,8 +1,16 @@
 import 'package:get/get.dart';
-import 'package:learn_getx/app/middlewares/auth_middleware.dart';
 
+import 'package:learn_getx/app/modules/category/views/category_add.dart';
+import 'package:learn_getx/app/modules/category/views/category_edit.dart';
+import 'package:learn_getx/app/modules/category/views/category_show.dart';
+
+import '../middlewares/auth_middleware.dart';
+import '../modules/category/bindings/category_binding.dart';
+import '../modules/category/views/category_view.dart';
 import '../modules/counter/bindings/counter_binding.dart';
 import '../modules/counter/views/counter_view.dart';
+import '../modules/event/bindings/event_binding.dart';
+import '../modules/event/views/event_view.dart';
 import '../modules/formulir/bindings/formulir_binding.dart';
 import '../modules/formulir/views/formulir_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -26,51 +34,74 @@ class AppPages {
 
   static final routes = [
     GetPage(
-      name: _Paths.HOME,
-      page: () => HomeView(),
-      binding: HomeBinding(),
-      middlewares: [AuthMiddleware()]
+        name: _Paths.HOME,
+        page: () => HomeView(),
+        binding: HomeBinding(),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: _Paths.PROFILE,
+        page: () => ProfileView(),
+        binding: ProfileBinding(),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: _Paths.COUNTER,
+        page: () => CounterView(),
+        binding: CounterBinding(),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: _Paths.FORMULIR,
+        page: () => FormulirView(),
+        binding: FormulirBinding(),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: _Paths.PAYMENT,
+        page: () => PaymentView(),
+        binding: PaymentBinding(),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: _Paths.PAYMENT_OUPUT,
+        page: () => PaymentOutput(dataFormulir: Get.arguments),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: _Paths.LOGIN,
+        page: () => LoginView(),
+        binding: LoginBinding(),
+        middlewares: [
+          AuthCheckMiddleware()
+        ] // Tambahkan AuthCheckMiddleware di sini
+        ),
+    GetPage(
+        name: _Paths.REGISTER,
+        page: () => RegisterView(),
+        binding: RegisterBinding(),
+        middlewares: [
+          AuthCheckMiddleware()
+        ] // Tambahkan AuthCheckMiddleware di sini
+        ),
+    GetPage(
+      name: _Paths.EVENT,
+      page: () => EventView(),
+      binding: EventBinding(),
     ),
     GetPage(
-      name: _Paths.PROFILE,
-      page: () => ProfileView(),
-      binding: ProfileBinding(),
-      middlewares: [AuthMiddleware()]
+        name: _Paths.CATEGORY,
+        page: () => CategoryView(),
+        binding: CategoryBinding(),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: _Paths.CATEGORY_ADD,
+        page: () => CategoryAddView(),
+        binding: CategoryBinding(),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+      name: _Paths.CATEGORY_EDIT,
+      page: () => CategoryEditView(category: Get.arguments),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
-      name: _Paths.COUNTER,
-      page: () => CounterView(),
-      binding: CounterBinding(),
-      middlewares: [AuthMiddleware()]
-    ),
-    GetPage(
-      name: _Paths.FORMULIR,
-      page: () => FormulirView(),
-      binding: FormulirBinding(),
-      middlewares: [AuthMiddleware()]
-    ),
-    GetPage(
-      name: _Paths.PAYMENT,
-      page: () => PaymentView(),
-      binding: PaymentBinding(),
-      middlewares: [AuthMiddleware()]
-    ),
-    GetPage(
-      name: _Paths.PAYMENT_OUPUT,
-      page: () => PaymentOutput(dataFormulir: Get.arguments),
-      middlewares: [AuthMiddleware()]
-    ),
-    GetPage(
-      name: _Paths.LOGIN,
-      page: () =>  LoginView(),
-      binding: LoginBinding(),
-      middlewares: [AuthCheckMiddleware()] // Tambahkan AuthCheckMiddleware di sini
-    ),
-    GetPage(
-      name: _Paths.REGISTER,
-      page: () => RegisterView(),
-      binding: RegisterBinding(),
-      middlewares: [AuthCheckMiddleware()] // Tambahkan AuthCheckMiddleware di sini
+      name: _Paths.CATEGORY_SHOW,
+      page: () => CategoryShowView(category: Get.arguments),
+      middlewares: [AuthMiddleware()],
     ),
   ];
 }

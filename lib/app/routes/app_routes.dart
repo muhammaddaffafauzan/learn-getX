@@ -1,5 +1,4 @@
 part of 'app_pages.dart';
-// DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
 
 abstract class Routes {
   Routes._();
@@ -16,6 +15,7 @@ abstract class Routes {
   static const CATEGORY_ADD = _Paths.CATEGORY_ADD;
   static const CATEGORY_EDIT = _Paths.CATEGORY_EDIT;
   static const CATEGORY_SHOW = _Paths.CATEGORY_SHOW;
+  static const BUTTON_NAVIGATION = _Paths.BUTTON_NAVIGATION;
 }
 
 abstract class _Paths {
@@ -33,4 +33,5 @@ abstract class _Paths {
   static const CATEGORY_ADD = '/category/add';
   static const CATEGORY_EDIT = '/category/edit';
   static const CATEGORY_SHOW = '/category/show';
+  static const BUTTON_NAVIGATION = '/';
 }

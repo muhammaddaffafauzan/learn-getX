@@ -34,33 +34,35 @@ class ProfileView extends GetView<ProfileController> {
               final user = userProfile['user'];
               final profile = userProfile['profile'];
 
-              return ListView(
-                children: [
-                  Card(
-                    elevation: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'ProfileView ${user?['username']}',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          SizedBox(height: 16),
-                          _buildProfileTile('Name', user?['username']),
-                          _buildProfileTile('Email', user?['email']),
-                          _buildProfileTile(
-                              'First Name', profile?['firstName']),
-                          _buildProfileTile('Last Name', profile?['lastName']),
-                          _buildProfileTile('Address', profile?['address']),
-                          // Add more profile information tiles as needed
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              );
+          return ListView(
+  children: [
+    Card(
+      elevation: 5,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Menampilkan foto profile di atas nama
+            _buildProfileTile('Image URL', profile?['url']),
+            SizedBox(height: 16),
+            Text(
+              'ProfileView ${user?['username']}',
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: 16),
+            // Memisahkan bagian "Full Name" menjadi "First Name" dan "Last Name"
+            _buildProfileTile('First Name', profile?['firstName']),
+            _buildProfileTile('Last Name', profile?['lastName']),
+            _buildProfileTile('Email', user?['email']),
+            _buildProfileTile('Address', profile?['address']),
+            // Add more profile information tiles as needed
+          ],
+        ),
+      ),
+    ),
+  ],
+);
             }
           },
         ),
@@ -68,17 +70,21 @@ class ProfileView extends GetView<ProfileController> {
     );
   }
 
-  ListTile _buildProfileTile(String title, String? value) {
-    return ListTile(
-      title: Text(
-        title,
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      subtitle: title == 'Image URL'
-          ? Image.network(value ?? '', height: 100, width: 100)
-          : Text(value ?? 'Loading...'),
-    );
-  }
+ListTile _buildProfileTile(String title, String? value) {
+  return ListTile(
+    title: Text(
+      title,
+      style: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    subtitle: title == 'Image URL'
+        ? CircleAvatar(
+            backgroundImage: NetworkImage(value ?? ''),
+            radius: 100, // Sesuaikan dengan kebutuhan Anda
+          )
+        : Text(value ?? 'Loading...'),
+  );
+}
+
 
   Future<void> _showLogoutConfirmationDialog(BuildContext context) async {
     return showDialog(

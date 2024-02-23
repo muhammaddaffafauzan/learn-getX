@@ -28,7 +28,7 @@ class LoginController extends GetxController {
 
       if (response.statusCode == 200 && responseBody['accessToken'] != null) {
         _saveUserData(responseBody);
-        Get.offAllNamed('/home');
+        Get.offAllNamed('/');
       } else {
         Get.snackbar('Error', 'Login failed. ${responseBody['msg']}');
       }

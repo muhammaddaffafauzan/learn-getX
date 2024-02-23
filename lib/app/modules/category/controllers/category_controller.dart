@@ -74,36 +74,78 @@ class CategoryController extends GetxController {
   }
 
   // Edit category
- Future<void> editCategory(String updatedCategoryName, int categoryId) async {
-  try {
-    if (updatedCategoryName.isEmpty) {
-      Get.snackbar('Error', 'Category field must be filled');
-      return;
-    }
+  Future<void> editCategory(String updatedCategoryName, int categoryId) async {
+    try {
+      if (updatedCategoryName.isEmpty) {
+        Get.snackbar('Error', 'Category field must be filled');
+        return;
+      }
 
-    var apiUrl = '${Api.baseUrl}/event-categories/update/$categoryId';
-    var headers = await Api.getHeaders();
+      var apiUrl = '${Api.baseUrl}/event-categories/update/$categoryId';
+      var headers = await Api.getHeaders();
 
-    var payload = {'category': updatedCategoryName};
+      var payload = json.encode({
+        'category': updatedCategoryName,
+      });
 
-    var response = await http.patch(
-      Uri.parse(apiUrl),
-      headers: headers,
-      body: payload,
-    );
+      print('$categoryId  - $payload');
 
-    if (response.statusCode == 200) {
-      Get.snackbar('Success', 'Category successfully edited');
-      fetchCategory(); // Refresh the categoryList
-      Get.offAndToNamed(Routes.CATEGORY); // Adjust the route accordingly
-    } else {
-      // Handle different HTTP status codes or server response here
-      print('Failed to edit category. Server response: ${response.body}');
-      // You might want to display an appropriate error message to the user.
-    }
-  } catch (e) {
-    print('Error during edit category: $e');
-    // Handle any other exceptions that might occur
+      var response = await http.put(
+        Uri.parse(apiUrl),
+        headers: headers,
+        body: payload,
+      );
+
+if (response.statusCode == 200) {
+  var responseBody = json.decode(response.body);
+
+  if (responseBody['msg'] == 'Event category updated successfully') {
+    Get.snackbar('Success', 'Category successfully edited');
+    fetchCategory(); // Refresh the categoryList
+    Get.offAndToNamed(Routes.CATEGORY); // Adjust the route accordingly
+  } else {
+    print('Failed to edit category. Server response: ${response.body}');
+    // Display an appropriate error message to the user.
+    Get.snackbar('Error', 'Failed to edit category. Unexpected server response');
   }
+} else {
+  // Handle different HTTP status codes or server response here
+  print('Failed to edit category. Server response: ${response.body}');
+  // You might want to display an appropriate error message to the user.
+  Get.snackbar('Error', 'Failed to edit category. Server response: ${response.body}');
 }
+
+    } catch (e) {
+      print('Error during edit category: $e');
+      // Handle any other exceptions that might occur
+    }
+  }
+
+  Future<void> deleteCategory(int categoryId) async {
+    try {
+      var apiUrl = '${Api.baseUrl}/event-categories/delete/$categoryId';
+      var headers = await Api.getHeaders();
+
+
+      print('$categoryId');
+
+      var response = await http.delete(
+        Uri.parse(apiUrl),
+        headers: headers,
+
+      );
+
+      if (response.statusCode == 200) {
+        Get.snackbar('Success', 'Category successfully edited');
+        fetchCategory(); // Refresh the categoryList
+      } else {
+        // Handle different HTTP status codes or server response here
+        print('Failed to edit category. Server response: ${response.body}');
+        // You might want to display an appropriate error message to the user.
+      }
+    } catch (e) {
+      print('Error during edit category: $e');
+      // Handle any other exceptions that might occur
+    }
+  }
 }

@@ -9,9 +9,10 @@ class AuthCheckMiddleware extends GetMiddleware {
     _isLoggedIn().then((isLoggedIn) {
       if (isLoggedIn) {
         // Jika sudah login, redirect ke halaman yang diinginkan (contoh: home)
-        Get.offNamed('/home');
+        Get.offNamed('/');
       }
     });
+
   }
 
   Future<bool> _isLoggedIn() async {
@@ -47,3 +48,4 @@ class AuthMiddleware extends GetMiddleware {
     return token != null;
   }
 }
+
